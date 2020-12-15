@@ -4,7 +4,11 @@ import pandas
 import requests
 import datetime
 
-run_num = 5
+def process_data(game, run_type, run_num):
+
+    url = generate_url(game, run_type, run_num)
+    runs_json = get_data(url)
+    transform_data(runs_json)
 
 def get_data(url):
 
@@ -77,23 +81,8 @@ def main():
     print("RUN START")
     print()
     
-    run_num = 300
-
-    # get data
-    url = generate_url("smw", "96_Exit", run_num)
-
-    runs_json = get_data(url)
-
-    # transform data
-    transform_data(runs_json)
-
-    # get data
-    url = generate_url("oot", "100", run_num)
-
-    runs_json = get_data(url)
-
-    #transform data
-    transform_data(runs_json)
+    process_data("smw", "96_Exit", 300)
+    process_data("oot", "100", 300)
 
     print()
     print("RUN END")
